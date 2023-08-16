@@ -38,4 +38,10 @@ export class NinjasService {
     const updatedNinja = { ...ninja, ...updateNinjaDto };
     return updatedNinja;
   }
+
+  deleteNinja(id: number) {
+    const toBeDeletedNinja = this.getOneNinja(id);
+    this.ninjas = this.ninjas.filter((ninja) => ninja.id !== id);
+    return toBeDeletedNinja;
+  }
 }
