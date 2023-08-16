@@ -15,31 +15,29 @@ import { NinjasService } from './ninjas.service';
 @Controller('ninjas')
 export class NinjasController {
   constructor(private readonly ninjasService: NinjasService) {}
+
   @Get()
   getNinjas(@Query('weapon') weapon: 'stars' | 'sword') {
     return this.ninjasService.getNinjas(weapon);
   }
 
   @Get(':id')
-  getOneNinja(@Param('id') id: string): string {
-    return `Get Ninja ${id}`;
+  getOneNinja(@Param('id') id: string) {
+    return this.ninjasService.getOneNinja(+id);
   }
 
   @Post()
   createNinja(@Body() createNinjaDto: CreateNinjaDto) {
-    return `Create Ninja ${createNinjaDto.name}`;
+    return this.ninjasService.createNinja(createNinjaDto);
   }
 
   @Patch(':id')
-  updateNinja(
-    @Param('id') id: string,
-    @Body() updateNinjaDto: UpdateNinjaDto,
-  ): string {
-    return `Update Ninja ${id} named ${updateNinjaDto.name}`;
+  updateNinja(@Param('id') id: string, @Body() updateNinjaDto: UpdateNinjaDto) {
+    return this.ninjasService.updateNinja(+id, updateNinjaDto);
   }
 
   @Delete(':id')
-  deleteNinja(@Param('id') id: string): string {
-    return `Delete Ninja ${id}`;
+  deleteNinja(@Param('id') id: string) {
+    return this.ninjasService.deleteNinja(+id);
   }
 }
