@@ -10,12 +10,14 @@ import {
 } from '@nestjs/common';
 import { CreateNinjaDto } from './dto/create-ninja.dto';
 import { UpdateNinjaDto } from './dto/update-ninja.dto';
+import { NinjasService } from './ninjas.service';
 
 @Controller('ninjas')
 export class NinjasController {
+  constructor(private readonly ninjasService: NinjasService) {}
   @Get()
-  getNinjas(@Query('type') type: string[]) {
-    return ['Ninja 1', 'Ninja 2', `${type}`];
+  getNinjas(@Query('weapon') weapon: 'stars' | 'sword') {
+    return this.ninjasService.getNinjas(weapon);
   }
 
   @Get(':id')
