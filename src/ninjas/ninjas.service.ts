@@ -1,5 +1,6 @@
-import { CreateNinjaDto } from './dto/create-ninja.dto';
 import { Injectable } from '@nestjs/common';
+import { CreateNinjaDto } from './dto/create-ninja.dto';
+import { UpdateNinjaDto } from './dto/update-ninja.dto';
 
 @Injectable()
 export class NinjasService {
@@ -30,5 +31,11 @@ export class NinjasService {
     const newNinja = { ...createNinjaDto, id: Date.now() };
     this.ninjas.push(newNinja);
     return newNinja;
+  }
+
+  updateNinja(id: number, updateNinjaDto: UpdateNinjaDto) {
+    const ninja = this.getOneNinja(id);
+    const updatedNinja = { ...ninja, ...updateNinjaDto };
+    return updatedNinja;
   }
 }
