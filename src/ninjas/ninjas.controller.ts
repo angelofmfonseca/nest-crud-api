@@ -23,9 +23,9 @@ export class NinjasController {
   }
 
   @Get(':id')
-  getOneNinja(@Param('id') id: number) {
+  getOneNinja(@Param('id') id: string) {
     try {
-      return this.ninjasService.getOneNinja(id);
+      return this.ninjasService.getOneNinja(+id);
     } catch (error) {
       throw new NotFoundException();
     }
@@ -37,12 +37,12 @@ export class NinjasController {
   }
 
   @Patch(':id')
-  updateNinja(@Param('id') id: number, @Body() updateNinjaDto: UpdateNinjaDto) {
-    return this.ninjasService.updateNinja(id, updateNinjaDto);
+  updateNinja(@Param('id') id: string, @Body() updateNinjaDto: UpdateNinjaDto) {
+    return this.ninjasService.updateNinja(+id, updateNinjaDto);
   }
 
   @Delete(':id')
-  deleteNinja(@Param('id') id: number) {
-    return this.ninjasService.deleteNinja(id);
+  deleteNinja(@Param('id') id: string) {
+    return this.ninjasService.deleteNinja(+id);
   }
 }
